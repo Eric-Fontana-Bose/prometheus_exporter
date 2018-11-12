@@ -10,6 +10,8 @@ def run
   custom_collector_filename = nil
   custom_type_collectors_filenames = []
 
+  puts 'Eric exporter'
+  
   OptionParser.new do |opt|
     opt.banner = "Usage: prometheus_exporter [options]"
     opt.on('-p',
