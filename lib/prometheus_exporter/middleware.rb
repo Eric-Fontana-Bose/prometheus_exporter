@@ -38,10 +38,13 @@ class PrometheusExporter::Middleware
   ensure
     status = (result && result[0]) || -1
     params = env["action_dispatch.request.parameters"]
-    action, controller = nil
+    route, action, controller = nil
+
     if params
       action = params["action"]
       controller = params["controller"]
+    else
+      route = env['sinatra.route']
     end
 
     @client.send_json(
@@ -50,7 +53,8 @@ class PrometheusExporter::Middleware
       queue_time: queue_time,
       action: action,
       controller: controller,
-      status: status
+      status: status,
+      route: route
     )
   end
 
