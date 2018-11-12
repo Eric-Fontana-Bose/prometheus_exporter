@@ -40,10 +40,13 @@ class PrometheusExporter::Middleware
     params = env["action_dispatch.request.parameters"]
     route, action, controller = nil
 
+
     if params
+      puts "Has parameters! #{params}"
       action = params["action"]
       controller = params["controller"]
     else
+      puts "No parameters: #{env}"
       route = env['sinatra.route']
     end
 
